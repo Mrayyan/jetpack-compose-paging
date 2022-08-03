@@ -12,13 +12,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repo: UserRepository
+    private val repo: UserRepository,
 ) : ViewModel() {
 
     val usersPager = Pager(
         PagingConfig(pageSize = 10)
     ) {
+
         UsersDataSource(repo)
+
     }.flow.cachedIn(viewModelScope)
 
 }
